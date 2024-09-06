@@ -3,7 +3,7 @@
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
 V1.0 
-- Created an undo button that uses a stack to store save states.
+- Created an undo button that uses a stack to retrieve save states.
 - Created a save functionality that converts the text area content into a .txt file.
 
 Potential improvements 
