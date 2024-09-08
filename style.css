@@ -7,7 +7,7 @@ body
 .button-style 
 {
     font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     border: none;
     padding: 8px 10px;
     border-radius: 5px;
@@ -39,7 +39,7 @@ body
 
 .heading 
 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     text-align: center;
     font-size: 30px;
     font-weight: bold;
@@ -58,10 +58,14 @@ body
 .content 
 {
     background-color: rgb(246, 241, 241);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
     color: black;
     height: 300px;
     width: 489px;
     padding: 5px;
+    outline: none;
+    resize: none;
+    text-wrap: wrap;
 }
+
 
