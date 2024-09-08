@@ -1,20 +1,56 @@
 let saveStack = [];
 
-document.getElementById("undo").addEventListener("click", undo );
+document.getElementById("undo").addEventListener("click", undo);
 
-document.getElementById("save").addEventListener("click", save );
+document.getElementById("save").addEventListener("click", save);
 
-document.getElementById("title").addEventListener("click", clear );
+document.getElementById("title").addEventListener("click", clear);
+
+document.getElementById("copy").addEventListener("click", copy);
+
+document.getElementById("red").addEventListener("click", function() {changeTheme("red")});
+
+document.getElementById("green").addEventListener("click", function() {changeTheme("green")});
+
+document.getElementById("blue").addEventListener("click", function() {changeTheme("blue")});
 
 const content = document.getElementById("editor");
 
 var timeoutID;
 
+function copy() 
+{   
+    // Uses the navigator API to copy the text area content to the clipboard.
+    const textToCopy = content;
+    textToCopy.select();
+    navigator.clipboard.writeText(textToCopy.value);
+};
+
+function changeTheme(colour)
+{   
+    switch(colour) 
+    {
+        case "red":
+            document.body.style.background = "rgb(139, 0, 0)";
+            document.getElementById("title").style.background = "rgb(139, 0, 0)";
+            break;
+        case "green":
+            document.body.style.background = "rgb(39, 107, 27)";
+            document.getElementById("title").style.background = "rgb(39, 107, 27)";
+            break;
+        case "blue":
+            document.body.style.background = "rgb(0, 98, 139)";
+            document.getElementById("title").style.background = "rgb(0, 98, 139)";
+            break;
+    }
+
+};
+
 function clear() 
 {
     // Clears the title input field for convinience when clicked on.
     document.getElementById("title").value = '';
-}
+};
 
 function save() 
 {
@@ -32,7 +68,7 @@ function save()
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-}
+};
 
 function autoSave() 
 {   
@@ -53,7 +89,6 @@ function undo()
         content.value = '';
     }
 };
-
 
 content.addEventListener("input", function() 
 {

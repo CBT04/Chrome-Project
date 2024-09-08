@@ -11,11 +11,21 @@
         <input value="New Note" id = "title" class="heading">
         </div>  
         <div class = "main-notepad">
-            <div class = "options">
+            <div class = "options-bar">
                 <button class = "button-style" id = "save"> 
                     SAVE </button>
                 <button class = "button-style" id = "undo"> 
-                    ↺ </button> 
+                    ↺ </button>
+                <button class = "button-style" id = "copy"> 
+                    <img src="images\copy.svg" style = "width:13px; height:15px"> </button> 
+                <div class = "theme-options">
+                    <button class = "button-style" id = "green"> 
+                        <img src="images\green.png" style = "width:13px; height:15px"> </button>
+                    <button class = "button-style" id = "red"> 
+                        <img src="images\red.png" style = "width:13px; height:15px"> </button>
+                    <button class = "button-style" id = "blue"> 
+                        <img src="images\blue.png" style = "width:13px; height:15px"> </button>
+                </div>
             </div>
             <textarea id = "editor" class= "content" rows = "19" cols="74"></textarea>
             <script src="script.js"></script>
