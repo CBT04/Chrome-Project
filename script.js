@@ -72,7 +72,7 @@ function save()
 
 function autoSave() 
 {   
-    // Peeks to see that the top value is not the same as the current value and pushes a new save to the stack.
+    // Peeks to check that the top value is not the same as the current value and pushes a new save to the stack.
     if (saveStack[saveStack.length-1] != content.value) 
         {
         saveStack.push(content.value);
