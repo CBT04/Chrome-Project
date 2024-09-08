@@ -1,7 +1,7 @@
 body 
 {
-    background-color: rgb(39, 107, 27);
     margin: 0;
+    background-color: rgb(39, 107, 27);
 }
 
 .button-style 
@@ -51,7 +51,7 @@ body
 .center 
 {
     margin: auto;
-    margin-top: 30px;
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -61,11 +61,13 @@ body
     font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
     color: black;
     height: 300px;
-    width: 489px;
+    width: 490px;
     padding: 5px;
     outline: none;
     resize: none;
     text-wrap: wrap;
+    border: none;
+    box-shadow: 0 6px 0 10px rgb(246, 241, 241);
 }
 
 
