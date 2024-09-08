@@ -28,6 +28,7 @@ function copy()
 
 function changeTheme(colour)
 {   
+    // Switches elements to a specified rgb colour depending on the value of the colour button that was chosen.
     switch(colour) 
     {
         case "red":
@@ -43,7 +44,6 @@ function changeTheme(colour)
             document.getElementById("title").style.background = "rgb(0, 98, 139)";
             break;
     }
-
 };
 
 function clear() 
