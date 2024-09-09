@@ -8,25 +8,26 @@
     </head>
     <body>
         <div class = "center">
-        <input value="New Note" id = "title" class="heading">
+        <input value="New Note" id = "fileName" class="heading">
         </div>  
         <div class = "main-notepad">
             <div class = "options-bar">
-                <button class = "button-style" id = "save"> 
+                <button class = "button-style" id = "save" data-desc = "Download the note as a .txt file."> 
                     SAVE </button>
-                <button class = "button-style" id = "undo"> 
+                <button class = "button-style" id = "undo" data-desc = "Undo input."> 
                     ↺ </button>
-                <button class = "button-style" id = "copy"> 
+                <button class = "button-style" id = "copy" data-desc = "Copy note contents to the clipboard."> 
                     <img src="images\copy.svg" style = "width:13px; height:15px"> </button> 
                 <div class = "theme-options">
-                    <button class = "button-style" id = "green"> 
+                    <button class = "button-style" id = "green" data-desc = "Change the notepad theme to green."> 
                         <img src="images\green.png" style = "width:13px; height:15px"> </button>
-                    <button class = "button-style" id = "red"> 
+                    <button class = "button-style" id = "red"  data-desc = "Change the notepad theme to red."> 
                         <img src="images\red.png" style = "width:13px; height:15px"> </button>
-                    <button class = "button-style" id = "blue"> 
+                    <button class = "button-style" id = "blue" data-desc = "Change the notepad theme to blue."> 
                         <img src="images\blue.png" style = "width:13px; height:15px"> </button>
                 </div>
             </div>
+            <div id = "description" class = "description"> </div>
             <textarea id = "editor" class= "content" rows = "19" cols="74"></textarea>
             <script src="script.js"></script>
         </div>

@@ -2,12 +2,15 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-v1.11
-- Minor aethsetic improvements.
+V1.2
+- Added button descriptions that appear when hovered over for 1 second.
 
 Version History:
 
-v1.1
+V1.11
+- Minor aethsetic improvements.
+
+V1.1
 - Added the ability to copy textarea content to the clipboard.
 - Added the ability to change the colour of the notepad.
 
