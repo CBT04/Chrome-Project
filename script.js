@@ -19,6 +19,10 @@ document.getElementById("copy").addEventListener("click", copy);
 document.getElementById("copy").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("copy");}, 1000);});
 document.getElementById("copy").addEventListener("mouseout", function() {clear("copy")});
 
+document.getElementById("paste").addEventListener("click", paste);
+document.getElementById("paste").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("paste");}, 1000);});
+document.getElementById("paste").addEventListener("mouseout", function() {clear("paste")});
+
 document.getElementById("green").addEventListener("click", function() {changeTheme("green")});
 document.getElementById("green").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("green", "right");}, 1000);});
 document.getElementById("green").addEventListener("mouseout", function() {clear("green");});
@@ -27,21 +31,36 @@ document.getElementById("red").addEventListener("click", function() {changeTheme
 document.getElementById("red").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("red", "right");}, 1000);});
 document.getElementById("red").addEventListener("mouseout", function() {clear("red")});
 
+document.getElementById("yellow").addEventListener("click", function() {changeTheme("yellow")});
+document.getElementById("yellow").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("yellow", "right");}, 1000);});
+document.getElementById("yellow").addEventListener("mouseout", function() {clear("yellow")});
+
 document.getElementById("blue").addEventListener("click", function() {changeTheme("blue")});
 document.getElementById("blue").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("blue", "right");}, 1000);});
 document.getElementById("blue").addEventListener("mouseout", function() {clear("blue")});
 
 function copy() 
 {   
-    // Uses the navigator API to copy the text area content to the clipboard.
+    // Uses the navigator object and clipboard API to copy the text area content to the clipboard.
+    clear("copy");
     const textToCopy = content;
     textToCopy.select();
     navigator.clipboard.writeText(textToCopy.value);
 };
 
+async function paste() 
+{   
+    // Uses the navigator object and clipboard API to read the clipboard contents and paste them into the text area.
+    clear("paste");
+    const clipboardText = await navigator.clipboard.readText();
+    content.value = content.value + clipboardText;
+};
+
+
 function changeTheme(colour)
 {   
     // Switches elements to a specified rgb colour depending on the value of the colour button that was chosen.
+    clear(colour);
     switch(colour) 
     {
         case "red":
@@ -56,21 +75,29 @@ function changeTheme(colour)
             document.body.style.background = "rgb(0, 98, 139)";
             document.getElementById("fileName").style.background = "rgb(0, 98, 139)";
             break;
+        case "yellow":
+            document.body.style.background = "rgb(186, 176, 14)";
+            document.getElementById("fileName").style.background = "rgb(186, 176, 14)";
     }
 };
 
 function enterFileName() 
 {
-    // Clears the fileName input field for convinience when clicked on.
-    document.getElementById("fileName").value = "";
+    // Clears the defualt fileName input field for convinience when clicked on.
+    let fileName = document.getElementById("fileName").value;
+    if (fileName == "New Note")
+    {
+        document.getElementById("fileName").value = "";
+    }
 };
 
 function save() 
 {
     // Creates and appends a link to the document body so that it can be saved as a text file.
+    clear("save");
     var link = document.createElement('a');
     link.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(content.value));
-    let fileName = document.getElementById("title").value;
+    let fileName = document.getElementById("fileName").value;
 
     // If the file name is left empty a defualt value is provided.
     if (fileName == '') {
@@ -95,6 +122,7 @@ function autoSave()
 function undo() 
 {   
     // Removes the latest item from the stack and peeks to provide the last save state. If the stack is empty the content is also empty.
+    clear("undo");
     saveStack.pop();
     let lastSave = saveStack[saveStack.length-1];
     content.value = lastSave;
@@ -110,7 +138,7 @@ function info(button, pos)
     button = document.getElementById(button);
     let buttonText = button.dataset.desc;
     buttonDesc.style.borderStyle = "ridge";
-    /* Using getBoundingCLientRect method to get the position and size of the button so that the decritpion can float 
+    /* Using getBoundingClientRect method to get the position and size of the button so that the decritpion can float 
     in a position relative to it.*/
     const rect = button.getBoundingClientRect();
     if (pos == "right")
