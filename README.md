@@ -2,10 +2,18 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-V1.2
-- Added button descriptions that appear when hovered over for 1 second.
+V1.31
+- Fixed an issue with the undo button saving duplicate states when the spacebar is pressed.
 
 Version History:
+
+V1.3
+- Added new theme option - yellow.
+- Added the ability to paste content from the clipboard.
+- Changed the behaviour of hovering over buttons so that descriptions will only appear after not being the button is not clicked for one second, similar to word.
+
+V1.2
+- Added button descriptions that appear when hovered over for 1 second.
 
 V1.11
 - Minor aethsetic improvements.
