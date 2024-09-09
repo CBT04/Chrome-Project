@@ -54,6 +54,7 @@ async function paste()
     clear("paste");
     const clipboardText = await navigator.clipboard.readText();
     content.value = content.value + clipboardText;
+    autoSave();
 };
 
 
@@ -100,7 +101,8 @@ function save()
     let fileName = document.getElementById("fileName").value;
 
     // If the file name is left empty a defualt value is provided.
-    if (fileName == '') {
+    if (fileName == '') 
+    {
         fileName = "Untitled Note"
     }
 
@@ -112,8 +114,9 @@ function save()
 
 function autoSave() 
 {   
-    // Peeks to check that the top value is not the same as the current value and pushes a new save to the stack.
-    if (saveStack[saveStack.length-1] != content.value) 
+    /* Peeks to check that the top value is not the same as the current value and pushes a new save to the stack.
+    Converts the values to strings and trims any whitespace at the beginning or end to make sure that values are correctly compared. */
+    if (saveStack[String(saveStack.length-1)].trim() != String(content.value).trim()) 
         {
         saveStack.push(content.value);
         }
@@ -126,14 +129,14 @@ function undo()
     saveStack.pop();
     let lastSave = saveStack[saveStack.length-1];
     content.value = lastSave;
-    if (saveStack == '') {
+    if (saveStack == '') 
+    {
         content.value = '';
     }
 };
 
 function info(button, pos)
 {   
-    setTimeout(1000);
     const buttonDesc = document.getElementById('description');
     button = document.getElementById(button);
     let buttonText = button.dataset.desc;
