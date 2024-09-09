@@ -54,7 +54,7 @@ async function paste()
     clear("paste");
     const clipboardText = await navigator.clipboard.readText();
     content.value = content.value + clipboardText;
-    autoSave();
+    autoSave("enable");
 };
 
 
@@ -112,11 +112,15 @@ function save()
     document.body.removeChild(link);
 };
 
-function autoSave() 
+function autoSave(paste) 
 {   
     /* Peeks to check that the top value is not the same as the current value and pushes a new save to the stack.
     Converts the values to strings and trims any whitespace at the beginning or end to make sure that values are correctly compared. */
-    if (saveStack[String(saveStack.length-1)].trim() != String(content.value).trim()) 
+    if (paste == "enable")
+        {
+        saveStack.push(content.value); 
+        }    
+    if (String(saveStack[saveStack.length-1]).trim() != String(content.value).trim()) 
         {
         saveStack.push(content.value);
         }
@@ -176,5 +180,6 @@ content.addEventListener("input", function()
     clearTimeout(timeoutIDsave);
     timeoutIDsave = setTimeout(function() {
         autoSave();
+        console.log(saveStack);
     }, 1000);
 });
