@@ -2,10 +2,15 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-V1.31
-- Fixed an issue with the undo button saving duplicate states when the spacebar is pressed.
+V2.0
+
+- The notepad now opens in the side panel rather than as a popup window so that the notepad can be used simultaneously when interacting with sites.
+- Minor aethsetic changes to compliment the new side panel window style.
 
 Version History:
+
+V1.31
+- Fixed an issue with the undo button saving duplicate states when the spacebar is pressed.
 
 V1.3
 - Added new theme option - yellow.
@@ -26,12 +31,8 @@ V1.0
 - Created an undo button that uses a stack to retrieve save states.
 - Created a save functionality that converts the text area content into a .txt file.
 
-Potential improvements: 
-- Create a service worker that will store any data input and retrieve it when the popup is reopened. Currently all input data is lost if the popup is closed.
-- Add functionality to load an existing txt file.
-- Add a button to paste from the clipboard.
-
 References:
 - https://stackoverflow.com/questions/40121246/trigger-function-when-someone-has-stopped-typing-for-1-second (Delayed Function)
 - https://stackoverflow.com/questions/65137434/how-can-i-save-a-txt-file-from-the-value-of-a-textarea (Saving the text area as a txt file)
+- https://developer.chrome.com/docs/extensions/reference/api/sidePanel (Opening the popup file as a side panel.)
 

@@ -2,9 +2,10 @@
 "manifest_version": 3,
 "name": "Chrome Notepad",
 "version": "1.31",
-"description": "A Notepad like extension for chrome!",
+"description": "A Notepad-like extension for chrome!",
 "permissions":
 [   
+    "sidePanel",
     "clipboardRead",
     "clipboardWrite"
 ],
@@ -14,7 +15,12 @@
     "48": "images/icon48.png",
     "16": "images/icon16.png"
 },
-"action": {
-      "default_popup": "popup.html"
+"side_panel": 
+{
+      "default_path": "sidePanel.html"
+},
+"background":
+{
+    "service_worker": "background.js"
 }
 }
