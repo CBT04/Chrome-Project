@@ -57,7 +57,6 @@ async function paste()
     autoSave("enable");
 };
 
-
 function changeTheme(colour)
 {   
     // Switches elements to a specified rgb colour depending on the value of the colour button that was chosen.
@@ -103,7 +102,7 @@ function save()
     // If the file name is left empty a defualt value is provided.
     if (fileName == '') 
     {
-        fileName = "Untitled Note"
+        fileName = "Untitled Note";
     }
 
     link.download = fileName + ".txt";

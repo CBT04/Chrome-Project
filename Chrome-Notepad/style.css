@@ -62,6 +62,13 @@ body
     outline: none;
 }
 
+.edit
+{
+    width: 10px;
+    height: 25px;
+    rotate: 45deg;
+}
+
 .center 
 {
     margin: auto;
