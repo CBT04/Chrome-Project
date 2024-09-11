@@ -4,7 +4,6 @@ let saveStack = [];
 var timeoutIDsave;
 var timeoutIDdesc;
 const content = document.getElementById("editor");
-let fileName = document.getElementById("fileName").value;
 
 document.getElementById("fileName").addEventListener("click", enterFileName);
 
@@ -40,6 +39,18 @@ document.getElementById("blue").addEventListener("click", function() {changeThem
 document.getElementById("blue").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("blue", "right");}, 1000);});
 document.getElementById("blue").addEventListener("mouseout", function() {clear("blue")});
 
+document.getElementById("bin").addEventListener("click", bin);
+document.getElementById("bin").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("bin", "bin");}, 1000);});
+document.getElementById("bin").addEventListener("mouseout", function() {clear("bin")});
+
+function bin()
+{
+    content.value = "";
+    document.getElementById("fileName").value = "New Note";
+    chrome.storage.sync.set({"title": document.getElementById("fileName").value})
+    autoSave("enable");
+}
+
 function copy() 
 {   
     // Uses the navigator object and clipboard API to copy the text area content to the clipboard.
@@ -68,21 +79,25 @@ function changeTheme(colour)
         case "red":
             document.body.style.background = "rgb(139, 0, 0)";
             document.getElementById("fileName").style.background = "rgb(139, 0, 0)";
+            document.getElementById("bin").style.background = "rgb(139, 0, 0)";
             chrome.storage.sync.set({"theme": "red"});
             break;
         case "green":
             document.body.style.background = "rgb(39, 107, 27)";
             document.getElementById("fileName").style.background = "rgb(39, 107, 27)";
+            document.getElementById("bin").style.background = "rgb(39, 107, 27)";
             chrome.storage.sync.set({"theme": "green"});
             break;
         case "blue":
             document.body.style.background = "rgb(0, 98, 139)";
             document.getElementById("fileName").style.background = "rgb(0, 98, 139)";
+            document.getElementById("bin").style.background = "rgb(0, 98, 139)";
             chrome.storage.sync.set({"theme": "blue"});
             break;
         case "yellow":
             document.body.style.background = "rgb(186, 176, 14)";
             document.getElementById("fileName").style.background = "rgb(186, 176, 14)";
+            document.getElementById("bin").style.background = "rgb(186, 176, 14)";
             chrome.storage.sync.set({"theme": "yellow"});
             break;
     }
@@ -91,13 +106,16 @@ function changeTheme(colour)
 function enterFileName() 
 {   
     // Clears the defualt fileName input field for convinience when clicked on.
-    fileName = document.getElementById("fileName").value;
-    if (fileName == "New Note")
+    const fileName = document.getElementById("fileName").value;
+    if (fileName == "New Note" || fileName == "Untitled Note")
     {
         document.getElementById("fileName").value = "";
     }
     document.getElementById("fileName").addEventListener("focusout", function() {
-        chrome.storage.sync.set({"title": document.getElementById("fileName").value});
+        if (document.getElementById("fileName").value == "")
+        {
+            document.getElementById("fileName").value = "Untitled Note";
+        }
     })
 };
 
@@ -152,7 +170,14 @@ function undo()
 
 function info(button, pos)
 {   
-    const buttonDesc = document.getElementById('description');
+    if (button == "bin")
+    {
+        buttonDesc = document.getElementById('description-bin');
+    }
+    else
+    {
+        buttonDesc = document.getElementById('description');
+    }
     button = document.getElementById(button);
     let buttonText = button.dataset.desc;
     buttonDesc.style.borderStyle = "ridge";
@@ -167,6 +192,10 @@ function info(button, pos)
     {
         offsetX = -40;
     }
+    else if(pos == "bin")
+    {
+        offsetX = -80;
+    }
     else
     {
       offsetX = -20;
@@ -180,7 +209,14 @@ function clear(button)
 {
     // Clears the textcontent of the corresponding button.
     clearTimeout(timeoutIDdesc);
-    const buttonDesc = document.getElementById('description');
+    if (button == "bin")
+        {
+            buttonDesc = document.getElementById('description-bin');
+        }
+    else
+        {
+            buttonDesc = document.getElementById('description');
+        }
     button = document.getElementById(button);
     buttonDesc.style.borderStyle = "none";
     buttonDesc.style.backgroundColor = "rgb(246, 241, 241)";
@@ -197,6 +233,10 @@ content.addEventListener("input", function()
     }, 1000);
 });
 
+document.getElementById("fileName").addEventListener("focusout", function() {
+    chrome.storage.sync.set({"title": document.getElementById("fileName").value});
+});
+
 // Retrieves relevant data that was saved using chrome's storage API upon loading of the DOM.
 document.addEventListener("DOMContentLoaded", function() {
   chrome.storage.sync.get(["savedContent", "title", "theme"], function(result) {
@@ -205,7 +245,11 @@ document.addEventListener("DOMContentLoaded", function() {
     if (result.savedContent !== undefined) 
         {
             content.value = result.savedContent;
-        }   
+        }
+    else
+    {
+        content.value = "";
+    }
     if (result.title !== undefined) 
         {
             document.getElementById("fileName").value = result.title;;

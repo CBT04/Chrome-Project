@@ -2,10 +2,14 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-V2.2
-- Used the chrome storage API so that relevent data can be stored when closing the extension and retrieved once the extension is reopened.
+V2.3
+- Added a button that will delete the current note.
+- Blank file names will now be replaced with "Untitled Note" as the title.
 
 Version History:
+
+V2.2
+- Used the chrome storage API so that relevent data can be stored when closing the extension and retrieved once the extension is reopened.
 
 V2.1
 - Changed the width and height of the notepad so that it is suitable for the standard side panel size making it less intrusive for laptop users.

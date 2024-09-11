@@ -1,7 +1,7 @@
 {
 "manifest_version": 3,
 "name": "Chrome Notepad",
-"version": "2.1",
+"version": "2.3",
 "description": "A Notepad-like extension for chrome!",
 "permissions":
 [   
