@@ -45,6 +45,7 @@ document.getElementById("bin").addEventListener("mouseout", function() {clear("b
 
 function bin()
 {
+    // Deletes the contents of the notepad and resets the title to new title.
     content.value = "";
     document.getElementById("fileName").value = "New Note";
     chrome.storage.sync.set({"title": document.getElementById("fileName").value})
