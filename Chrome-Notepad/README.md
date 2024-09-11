@@ -2,12 +2,15 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-V2.0
-
-- The notepad now opens in the side panel rather than as a popup window so that the notepad can be used simultaneously when interacting with sites.
-- Minor aethsetic changes to compliment the new side panel window style.
+V2.1
+- Changed the width and height of the notepad so that it is suitable for the standard side panel size making it less intrusive for laptop users.
+- Fixed an issue with the description box showing as a white "pixel" when not displaying the descritpion.
 
 Version History:
+
+V2.0
+- The notepad now opens in the side panel rather than as a popup window so that the notepad can be used simultaneously when interacting with sites.
+- Minor aethsetic changes to compliment the new side panel window style.
 
 V1.31
 - Fixed an issue with the undo button saving duplicate states when the spacebar is pressed.

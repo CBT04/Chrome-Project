@@ -161,6 +161,7 @@ function info(button, pos)
     }
     buttonDesc.style.left = (rect.right + offsetX) + "px";
     buttonDesc.textContent = buttonText;
+    buttonDesc.style.display = "block";
 };
 
 function clear(button) 
@@ -172,6 +173,7 @@ function clear(button)
     buttonDesc.style.borderStyle = "none";
     buttonDesc.style.backgroundColor = "rgb(246, 241, 241)";
     buttonDesc.textContent = "";
+    buttonDesc.style.display = "none";
 };
 
 content.addEventListener("input", function() 
