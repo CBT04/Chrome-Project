@@ -5,6 +5,7 @@
 "description": "A Notepad-like extension for chrome!",
 "permissions":
 [   
+    "storage",
     "sidePanel",
     "clipboardRead",
     "clipboardWrite"

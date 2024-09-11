@@ -4,6 +4,7 @@ let saveStack = [];
 var timeoutIDsave;
 var timeoutIDdesc;
 const content = document.getElementById("editor");
+let fileName = document.getElementById("fileName").value;
 
 document.getElementById("fileName").addEventListener("click", enterFileName);
 
@@ -59,36 +60,45 @@ async function paste()
 
 function changeTheme(colour)
 {   
-    // Switches elements to a specified rgb colour depending on the value of the colour button that was chosen.
+    /* Switches elements to a specified rgb colour depending on the value of the colour button that was chosen. 
+    Uses the chrome storage API to save the theme value. */
     clear(colour);
     switch(colour) 
     {
         case "red":
             document.body.style.background = "rgb(139, 0, 0)";
             document.getElementById("fileName").style.background = "rgb(139, 0, 0)";
+            chrome.storage.sync.set({"theme": "red"});
             break;
         case "green":
             document.body.style.background = "rgb(39, 107, 27)";
             document.getElementById("fileName").style.background = "rgb(39, 107, 27)";
+            chrome.storage.sync.set({"theme": "green"});
             break;
         case "blue":
             document.body.style.background = "rgb(0, 98, 139)";
             document.getElementById("fileName").style.background = "rgb(0, 98, 139)";
+            chrome.storage.sync.set({"theme": "blue"});
             break;
         case "yellow":
             document.body.style.background = "rgb(186, 176, 14)";
             document.getElementById("fileName").style.background = "rgb(186, 176, 14)";
+            chrome.storage.sync.set({"theme": "yellow"});
+            break;
     }
 };
 
 function enterFileName() 
-{
+{   
     // Clears the defualt fileName input field for convinience when clicked on.
-    let fileName = document.getElementById("fileName").value;
+    fileName = document.getElementById("fileName").value;
     if (fileName == "New Note")
     {
         document.getElementById("fileName").value = "";
     }
+    document.getElementById("fileName").addEventListener("focusout", function() {
+        chrome.storage.sync.set({"title": document.getElementById("fileName").value});
+    })
 };
 
 function save() 
@@ -123,6 +133,8 @@ function autoSave(instant)
         {
         saveStack.push(content.value);
         }
+    // Uses the chrome storage API to save the content of the notepad when data is input.
+    chrome.storage.sync.set({"savedContent": content.value});
 };
 
 function undo() 
@@ -183,4 +195,25 @@ content.addEventListener("input", function()
     timeoutIDsave = setTimeout(function() {
         autoSave();
     }, 1000);
+});
+
+// Retrieves relevant data that was saved using chrome's storage API upon loading of the DOM.
+document.addEventListener("DOMContentLoaded", function() {
+  chrome.storage.sync.get(["savedContent", "title", "theme"], function(result) {
+    
+    // Checks that there is data stored.
+    if (result.savedContent !== undefined) 
+        {
+            content.value = result.savedContent;
+        }   
+    if (result.title !== undefined) 
+        {
+            document.getElementById("fileName").value = result.title;;
+        } 
+    if (result.theme !== undefined) 
+        {
+            let colour = result.theme;
+            changeTheme(colour);
+        } 
+  })
 });

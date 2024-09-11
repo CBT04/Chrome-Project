@@ -2,11 +2,14 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
+V2.2
+- Used the chrome storage API so that relevent data can be stored when closing the extension and retrieved once the extension is reopened.
+
+Version History:
+
 V2.1
 - Changed the width and height of the notepad so that it is suitable for the standard side panel size making it less intrusive for laptop users.
 - Fixed an issue with the description box showing as a white "pixel" when not displaying the descritpion.
-
-Version History:
 
 V2.0
 - The notepad now opens in the side panel rather than as a popup window so that the notepad can be used simultaneously when interacting with sites.
@@ -35,7 +38,8 @@ V1.0
 - Created a save functionality that converts the text area content into a .txt file.
 
 References:
-- https://stackoverflow.com/questions/40121246/trigger-function-when-someone-has-stopped-typing-for-1-second (Delayed Function)
+- https://stackoverflow.com/questions/40121246/trigger-function-when-someone-has-stopped-typing-for-1-second (Delayed function)
 - https://stackoverflow.com/questions/65137434/how-can-i-save-a-txt-file-from-the-value-of-a-textarea (Saving the text area as a txt file)
-- https://developer.chrome.com/docs/extensions/reference/api/sidePanel (Opening the popup file as a side panel.)
+- https://developer.chrome.com/docs/extensions/reference/api/sidePanel (Opening the popup file as a side panel)
+- https://developer.chrome.com/docs/extensions/reference/api/storage (Chrome storage API)
 
