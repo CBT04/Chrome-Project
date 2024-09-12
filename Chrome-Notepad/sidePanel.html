@@ -7,19 +7,37 @@
         <title> Notepad </title>
     </head>
     <body>
+        <div class = "popup" id = "popup"> 
+            <button class = "menu-back" id = "menuBack"> <img src = "images\menu.png" class = "menu-icon" style = "width:16px; height:14px"> </button> 
+            <div class = "center">
+                <h1 class = "my-notes">My Notes</h1>
+                    <div class = "main-menu">
+                        <ul class = "notes">
+                            <li><button class = "note-button" id = "note1">New Note</button></li>
+                            <li><button class = "note-button" id = "note2">New Note</button></li>
+                            <li><button class = "note-button" id = "note3">New Note</button></li>
+                            <li><button class = "note-button" id = "note4">New Note</button></li>
+                            <li><button class = "note-button" id = "note5">New Note</button></li>
+                            <li><button class = "note-button" id = "note6">New Note</button></li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+
+        <button id = "menu" class = "menu"> <img src = "images\menu.png" class = "menu-icon-back" style = "width:16px; height:14px"> </button>
         <div class = "center">
         <input value="New Note" id ="fileName" class="heading">
         </div>  
         <div class = "main-notepad">
             <div class = "options-bar">
                 <button class = "button-style" id = "save" data-desc="Download the note as a .txt file."> 
-                    SAVE </button>
-                <button class = "button-style" id = "undo" data-desc="Undo input."> 
-                    ↺ </button>
+                    <img src="images\download.svg" style = "width:13px; height:15px"> </button>
+                <button class = "button-style" id = "undo" data-desc="Undo last input."> 
+                    <img src="images\undo.svg" style = "width:13px; height:11px"> </button>
                 <button class = "button-style" id = "copy" data-desc="Copy note contents to the clipboard."> 
                     <img src="images\copy.svg" style = "width:13px; height:15px"> </button> 
                 <button class = "button-style" id = "paste" data-desc = "Paste clipboard contents into the notepad."> 
-                    <img src="images\paste.svg" style = "width:14px; height:16px"> </button> 
+                    <img src="images\paste.svg" style = "width:13px; height:16px"> </button> 
                 <div class = "theme-options">
                     <button class = "button-style" id = "green" data-desc="Change the notepad theme to green."> 
                         <img src="images\green.png" style = "width:13px; height:15px"> </button>
@@ -34,9 +52,10 @@
             <div id ="description" class ="description"> </div>
             <textarea id ="editor" class="content" rows ="19" cols="74"></textarea>
             <div id ="description-bin" class ="description-bin"> </div>
-            <button class = "bin" id = "bin" data-desc= "Delete Note."> <img src="images\bin.svg" style = "width:13px; height:15px"> </button>
+            <button class = "bin" id = "bin" data-desc= "Delete Note."> <img src="images\bin.svg" class = "bin-icon" style = "width:13px; height:15px"> </button>
+            <button class = "new" id = "new" data-desc= "New Note."> <img src="images\add.svg" class = "new-icon" style = "width:15px; height:15px"> </button>
+            <footer>V3.0B</footer>
             <script src="sidePanel.js"></script>
-            <footer>V2.2</footer>
         </div>
     </body>
 </html>

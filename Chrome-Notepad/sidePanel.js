@@ -1,9 +1,17 @@
 // Delceration of variables and binding event listeners to buttons.
 let saveStack = [];
 
+var active;
 var timeoutIDsave;
 var timeoutIDdesc;
+let currentNote = "note1";
 const content = document.getElementById("editor");
+let note1Arr = {title:"", theme:"", contents:"" };
+let note2Arr = {title:"", theme:"", contents:"" };
+let note3Arr = {title:"", theme:"", contents:"" };
+let note4Arr = {title:"", theme:"", contents:"" };
+let note5Arr = {title:"", theme:"", contents:"" };
+let note6Arr = {title:"", theme:"", contents:"" };
 
 document.getElementById("fileName").addEventListener("click", enterFileName);
 
@@ -43,11 +51,24 @@ document.getElementById("bin").addEventListener("click", bin);
 document.getElementById("bin").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("bin", "bin");}, 1000);});
 document.getElementById("bin").addEventListener("mouseout", function() {clear("bin")});
 
+document.getElementById("new").addEventListener("click", newNote);
+document.getElementById("new").addEventListener("mouseover", function() {timeoutIDdesc = setTimeout(function() {info("new", "bin");}, 1000);});
+document.getElementById("new").addEventListener("mouseout", function() {clear("new")});
+
+document.getElementById("menu").addEventListener("click", openMenu);
+document.getElementById("menuBack").addEventListener("click", closeMenu);
+
+document.getElementById("note1").addEventListener("click", function() {switchNote("note1")});
+document.getElementById("note2").addEventListener("click", function() {switchNote("note2")});
+document.getElementById("note3").addEventListener("click", function() {switchNote("note3")});
+document.getElementById("note4").addEventListener("click", function() {switchNote("note4")});
+document.getElementById("note5").addEventListener("click", function() {switchNote("note5")});
+document.getElementById("note6").addEventListener("click", function() {switchNote("note6")});
+
 function bin()
 {
     // Deletes the contents of the notepad and resets the title to new title.
     content.value = "";
-    document.getElementById("fileName").value = "New Note";
     chrome.storage.sync.set({"title": document.getElementById("fileName").value})
     autoSave("enable");
 }
@@ -81,24 +102,36 @@ function changeTheme(colour)
             document.body.style.background = "rgb(139, 0, 0)";
             document.getElementById("fileName").style.background = "rgb(139, 0, 0)";
             document.getElementById("bin").style.background = "rgb(139, 0, 0)";
+            document.getElementById("menu").style.background = "rgb(139, 0, 0)";
+            document.getElementById("new").style.background = "rgb(139, 0, 0)";
+            document.getElementById(currentNote).style.background = "rgb(139, 0, 0)";
             chrome.storage.sync.set({"theme": "red"});
             break;
         case "green":
-            document.body.style.background = "rgb(39, 107, 27)";
+            document.body.style.background = "";
             document.getElementById("fileName").style.background = "rgb(39, 107, 27)";
             document.getElementById("bin").style.background = "rgb(39, 107, 27)";
+            document.getElementById("menu").style.background = "rgb(39, 107, 27)";
+            document.getElementById("new").style.background = "rgb(39, 107, 27)";
+            document.getElementById(currentNote).style.background = "rgb(39, 107, 27)";
             chrome.storage.sync.set({"theme": "green"});
             break;
         case "blue":
             document.body.style.background = "rgb(0, 98, 139)";
             document.getElementById("fileName").style.background = "rgb(0, 98, 139)";
             document.getElementById("bin").style.background = "rgb(0, 98, 139)";
+            document.getElementById("menu").style.background = "rgb(0, 98, 139)";
+            document.getElementById("new").style.background = "rgb(0, 98, 139)";
+            document.getElementById(currentNote).style.background = "rgb(0, 98, 139)";
             chrome.storage.sync.set({"theme": "blue"});
             break;
         case "yellow":
             document.body.style.background = "rgb(186, 176, 14)";
             document.getElementById("fileName").style.background = "rgb(186, 176, 14)";
             document.getElementById("bin").style.background = "rgb(186, 176, 14)";
+            document.getElementById("menu").style.background = "rgb(186, 176, 14)";
+            document.getElementById("new").style.background = "rgb(186, 176, 14)";
+            document.getElementById(currentNote).style.background = "rgb(186, 176, 14)";
             chrome.storage.sync.set({"theme": "yellow"});
             break;
     }
@@ -117,6 +150,7 @@ function enterFileName()
         {
             document.getElementById("fileName").value = "Untitled Note";
         }
+        document.getElementById(currentNote).textContent = document.getElementById("fileName").value;
     })
 };
 
@@ -154,6 +188,7 @@ function autoSave(instant)
         }
     // Uses the chrome storage API to save the content of the notepad when data is input.
     chrome.storage.sync.set({"savedContent": content.value});
+    console.log(content.value);
 };
 
 function undo() 
@@ -167,11 +202,13 @@ function undo()
     {
         content.value = '';
     }
+    // Uses the chrome storage API to save the content of the notepad when data is input.
+    chrome.storage.sync.set({"savedContent": content.value});
 };
 
 function info(button, pos)
 {   
-    if (button == "bin")
+    if (button == "bin" || button == "new")
     {
         buttonDesc = document.getElementById('description-bin');
     }
@@ -210,7 +247,7 @@ function clear(button)
 {
     // Clears the textcontent of the corresponding button.
     clearTimeout(timeoutIDdesc);
-    if (button == "bin")
+    if (button == "bin" || button == "new")
         {
             buttonDesc = document.getElementById('description-bin');
         }
@@ -218,10 +255,6 @@ function clear(button)
         {
             buttonDesc = document.getElementById('description');
         }
-    button = document.getElementById(button);
-    buttonDesc.style.borderStyle = "none";
-    buttonDesc.style.backgroundColor = "rgb(246, 241, 241)";
-    buttonDesc.textContent = "";
     buttonDesc.style.display = "none";
 };
 
@@ -239,26 +272,171 @@ document.getElementById("fileName").addEventListener("focusout", function() {
 });
 
 // Retrieves relevant data that was saved using chrome's storage API upon loading of the DOM.
-document.addEventListener("DOMContentLoaded", function() {
-  chrome.storage.sync.get(["savedContent", "title", "theme"], function(result) {
-    
-    // Checks that there is data stored.
-    if (result.savedContent !== undefined) 
-        {
-            content.value = result.savedContent;
-        }
-    else
+function onLoad(initial)
+{  
+  showCurrentNote = document.getElementById(currentNote);
+  showCurrentNote.style.display = "inline";
+  chrome.storage.sync.get(["savedContent", "title", "theme", "current"], function(result) {
+  if (initial == true)
+  {
+    if (result.current !== undefined)
     {
-        content.value = "";
+     currentNote = result.current;
+    } 
+  }
+  title = result.title; theme = result.theme; savedContent = result.savedContent;
+  recordData(title, theme, savedContent, currentNote);
+
+  if (initial == true)
+    {
+    setData(note1Arr);
     }
-    if (result.title !== undefined) 
+  }
+)};
+
+
+function openMenu()
+{
+    popup = document.getElementById("popup");
+    popup.style.display = "block";
+};
+
+function closeMenu()
+{
+    popup = document.getElementById("popup");
+    popup.style.display = "none";
+};
+
+function newNote()
+{   
+    // Creates a blank note in the next available space and updates the current note value.
+    document.getElementById(currentNote).textContent = document.getElementById("fileName").value;
+    let noteNo = currentNote;
+    chrome.storage.sync.get(["savedContent", "title", "theme", "current"], function(result) {
+        title = result.title; theme = result.theme; savedContent = result.savedContent;
+        recordData(title, theme, savedContent, noteNo);
+    });
+
+    content.value = "";
+    document.body.style.background = "rgb(39, 107, 27)";
+    document.getElementById("fileName").style.background = "rgb(39, 107, 27)";
+    document.getElementById("bin").style.background = "rgb(39, 107, 27)";
+    document.getElementById("menu").style.background = "rgb(39, 107, 27)";
+    document.getElementById("new").style.background = "rgb(39, 107, 27)";
+    
+    let intValue = Number(currentNote[4].valueOf());
+    intValue++;
+    currentNote = String("note" + intValue);
+    document.getElementById(currentNote).style.display = "inline";
+    document.getElementById("fileName").value = "New Note";
+    document.getElementById(currentNote).textContent = document.getElementById("fileName").value;
+    chrome.storage.sync.set({"title": document.getElementById("fileName").value});
+    recordData("New Note", "green", "", currentNote);
+    autoSave("enable");
+
+    if (currentNote == "note6")
+    {
+        document.getElementById("new").style.display = "none";
+    }
+}
+
+function recordData(title, theme, contents, current)
+{   
+ console.log(current);
+ console.log(current == "note1");
+ if (current == "note1")
+ {
+    note1Arr = {title: title, theme: theme, contents: contents};
+    console.log(note1Arr);
+ }
+ else if (current == "note2")
+ {
+    note2Arr = {title: title, theme: theme, contents: contents};
+    console.log(note2Arr);
+ }
+ else if (current == "note3")
+ {
+    note3Arr = {title: title, theme: theme, contents: contents};
+ }
+ else if (current == "note4")
+ {
+    note4Arr = {title: title, theme: theme, contents: contents};
+ }
+ else if (current == "note5")
+ {
+    note5Arr = {title: title, theme: theme, contents: contents};
+ }
+ else if (current == "note6")
+ {
+    note6Arr = {title: title, theme: theme, contents: contents};
+ }
+
+}
+
+function setData(note)
+{
+    if (note.title !== undefined)
+    {
+        document.getElementById("fileName").value = note.title;
+    }
+    if (note.theme !== undefined)
+    {
+        changeTheme(note.theme);
+    }
+    if (note.contents !== undefined)
+    {
+        content.value = note.contents;
+    }
+}
+
+function switchNote(note)
+{   
+    colour = "unkown";
+    noteNo = currentNote;
+    if (document.body.style.background == "rgb(39, 107, 27)")
+    {
+        colour = "green";
+    }
+    else if (document.body.style.background == "rgb(139, 0, 0)")
+    {
+        colour = "red";    
+    }
+    else if (document.body.style.background == "rgb(0, 98, 139)")
+    {
+        colour = "blue";        
+    }
+    else if (document.body.style.background == "rgb(186, 176, 14)")
+    {
+        colour = "yellow";        
+    }
+    recordData(document.getElementById("fileName").value, colour, content.value, noteNo);
+    currentNote = note;
+    if (note == "note1")
+        {   
+           setData(note1Arr);
+        }
+    else if (note == "note2")
         {
-            document.getElementById("fileName").value = result.title;;
-        } 
-    if (result.theme !== undefined) 
+           setData(note2Arr);
+        }
+    else if (note == "note3")
         {
-            let colour = result.theme;
-            changeTheme(colour);
-        } 
-  })
-});
+           setData(note3Arr);
+        }
+    else if (note == "note4")
+        {
+           setData(note4Arr);
+        }
+    else if (note == "note5")
+        {
+           setData(note5Arr);
+        }
+    else if (note == "note6")
+        {
+           setData(note6Arr);
+        }
+    popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
+
+onLoad(true);
