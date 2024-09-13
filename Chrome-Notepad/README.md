@@ -2,11 +2,17 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
+V3.0
+- Completed the note storage system.
+- Added elements to the menu to better inform the user of the notepad features in addition to breaking up whitespace.
+- Added an info element when hovering over the menu button.
+- Fixed various bugs that occured when switching between notes.
+
+Version History:
+
 V3.0B
 - (Incomplete) Up to six notes can be saved by the chrome storage API and accessed within the new menu section.
 - Save button has been replaced with a download icon to better reflect is usage.
-
-Version History:
 
 V2.3
 - Added a button that will delete the current note.

@@ -430,10 +430,6 @@ function switchNote(note)
         {
            setData(note6Obj, false);
         }
-    if (document.getElementById("fileName").value == "New Note" && content.value == "")
-    {
-        changeTheme("green", currentNote);
-    }
 
     // Hides the menu popup element.
     popup = document.getElementById("popup");
