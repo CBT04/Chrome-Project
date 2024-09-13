@@ -4,13 +4,16 @@
         <meta charset = "UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <title> Notepad </title>
+        <title> Sidebar Notepad </title>
     </head>
     <body>
+
+        <!-- The popup tag contains all of the buttons and text elements used within the popup menu. -->
         <div class = "popup" id = "popup"> 
             <button class = "menu-back" id = "menuBack"> <img src = "images\menu.png" class = "menu-icon" style = "width:16px; height:14px"> </button> 
             <div class = "center">
                 <h1 class = "my-notes">My Notes</h1>
+                 <h3>Store up to 6 notes at once.</h3>
                     <div class = "main-menu">
                         <ul class = "notes">
                             <li><button class = "note-button" id = "note1">New Note</button></li>
@@ -21,12 +24,15 @@
                             <li><button class = "note-button" id = "note6">New Note</button></li>
                         </ul>
                     </div>
+                    <h3 class = "sign-in">Sign into your Google account to sync notes between devices.</h3>
             </div>
         </div>
 
-        <button id = "menu" class = "menu"> <img src = "images\menu.png" class = "menu-icon-back" style = "width:16px; height:14px"> </button>
+        <!-- The following contains all of the elements found in the main notepad page. -->
+        <button id = "menu" class = "menu" data-desc="Switch note."> <img src = "images\menu.png" class = "menu-icon-back" style = "width:16px; height:14px"> </button>
+        <div id ="description-menu" class ="description-menu"> </div>
         <div class = "center">
-        <input value="New Note" id ="fileName" class="heading">
+        <input value="New Note" id ="fileName" class="heading" maxlength="15">
         </div>  
         <div class = "main-notepad">
             <div class = "options-bar">
@@ -53,9 +59,9 @@
             <textarea id ="editor" class="content" rows ="19" cols="74"></textarea>
             <div id ="description-bin" class ="description-bin"> </div>
             <button class = "bin" id = "bin" data-desc= "Delete Note."> <img src="images\bin.svg" class = "bin-icon" style = "width:13px; height:15px"> </button>
-            <button class = "new" id = "new" data-desc= "New Note."> <img src="images\add.svg" class = "new-icon" style = "width:15px; height:15px"> </button>
-            <footer>V3.0B</footer>
+            <footer>V3.0</footer>
             <script src="sidePanel.js"></script>
         </div>
+
     </body>
 </html>
