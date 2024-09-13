@@ -1,13 +1,12 @@
 {
 "manifest_version": 3,
-"name": "Sidebar Notepad",
+"name": "Side bar Notepad",
 "version": "1.0",
-"description": "A Notepad-like extension for chrome that utilises the sidebar.",
+"description": "A Notepad-like extension for chrome that utilises the side bar.",
 "permissions":
 [   
     "storage",
     "sidePanel",
-    "clipboardRead",
     "clipboardWrite"
 ],
 "icons": 
