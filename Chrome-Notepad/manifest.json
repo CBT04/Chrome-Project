@@ -1,7 +1,7 @@
 {
 "manifest_version": 3,
 "name": "Sidebar Notepad",
-"version": "1.0R",
+"version": "1.0",
 "description": "A Notepad-like extension for chrome that utilises the sidebar.",
 "permissions":
 [   
