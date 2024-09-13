@@ -2,13 +2,16 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
+V1.0R
+- Pending release on the Chrome Web Store.
+
+Development Version History:
+
 V3.0
 - Completed the note storage system.
 - Added elements to the menu to better inform the user of the notepad features in addition to breaking up whitespace.
 - Added an info element when hovering over the menu button.
 - Fixed various bugs that occured when switching between notes.
-
-Version History:
 
 V3.0B
 - (Incomplete) Up to six notes can be saved by the chrome storage API and accessed within the new menu section.
@@ -56,4 +59,5 @@ References:
 - https://stackoverflow.com/questions/65137434/how-can-i-save-a-txt-file-from-the-value-of-a-textarea (Saving the text area as a txt file)
 - https://developer.chrome.com/docs/extensions/reference/api/sidePanel (Opening the popup file as a side panel)
 - https://developer.chrome.com/docs/extensions/reference/api/storage (Chrome storage API)
+- https://developer.mozilla.org/en-US/
 
