@@ -2,7 +2,7 @@
 
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
-V1.0R
+V1.0 (Release)
 - Pending release on the Chrome Web Store.
 
 Development Version History:
