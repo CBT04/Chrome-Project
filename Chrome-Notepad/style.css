@@ -172,6 +172,7 @@ footer
 
 .my-notes
 {
+    margin-top: 5vh;
     color: black;
     font-weight: bold;
     text-align: center;
@@ -227,7 +228,7 @@ footer
 {
     text-align: center;
     width: 300px;
-    margin-top: 40px;
+    padding-top: 20px;
     margin: auto;
 }
 

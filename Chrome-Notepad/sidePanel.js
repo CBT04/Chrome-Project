@@ -198,8 +198,8 @@ function enterFileName()
             document.getElementById("fileName").value = "Untitled Note";
         }
         document.getElementById(currentNote).textContent = document.getElementById("fileName").value;
+        save();
     })
-    save();
 };
 
 function info(button, pos)
@@ -368,12 +368,10 @@ function setData(note, init)
 
     /* Checks that note values are not undefined or empty and updates the values of the current note with the stored data for the 
     correpsonding note. */
-
-    console.log(note);
-
     if (note && (note.title !== undefined && note.title !== ""))
     {
         document.getElementById("fileName").value = note.title;
+        document.getElementById(currentNote).textContent = note.title;
     }
     else
     {
@@ -381,7 +379,6 @@ function setData(note, init)
     }
     if (note && (note.theme !== undefined && note.theme !== ""))
     {
-        console.log(note.theme);
         changeTheme(note.theme, currentNote);
     }
     else
@@ -430,6 +427,8 @@ function switchNote(note)
         {
            setData(note6Obj, false);
         }
+    
+    console.log(document.getElementById(currentNote).textContent);
 
     // Hides the menu popup element.
     popup = document.getElementById("popup");
@@ -477,7 +476,8 @@ document.addEventListener("DOMContentLoaded", function()
     });
 
     // Switches to the note that the user was last editing.
-    chrome.storage.sync.get(["current"], function(result) {
+    chrome.storage.sync.get(["current"], function(result) 
+    {
         if (result.current !== undefined)
     {
      currentNote = result.current;
@@ -506,5 +506,5 @@ document.addEventListener("DOMContentLoaded", function()
         {
            setData(note6Obj, true);
         }
-   });
+    });
 });
