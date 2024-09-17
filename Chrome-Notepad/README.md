@@ -3,7 +3,8 @@
 This is a very basic text editor chrome extension project developed using html, css and javascript as a way for me to learn a bit of javascript.
 
 V1.0 (Release)
-- Pending release on the Chrome Web Store.
+- Now released on the Chrome webstore at https://chromewebstore.google.com/detail/side-panel-notepad/gopjnkhllbiccdmilekbibjdleogkfcj.
+- Fixed some issues that occured upon reloading the extension.
 
 Development Version History:
 
